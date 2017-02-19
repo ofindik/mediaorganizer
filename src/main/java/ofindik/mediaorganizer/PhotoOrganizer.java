@@ -9,7 +9,9 @@ public class PhotoOrganizer {
 
 	private String destFolder;
 
-	private String testMode;
+	private boolean testMode;
+
+	private boolean useLastModifiedDate;
 
 	public static void main (String[] args) throws Exception {
 
@@ -21,7 +23,8 @@ public class PhotoOrganizer {
 	public PhotoOrganizer (String[] args) {
 		this.sourceFolder = args[0];
 		this.destFolder = args[1];
-		this.testMode = args[2];
+		this.testMode = Boolean.parseBoolean (args[2]);
+		this.useLastModifiedDate = Boolean.parseBoolean (args[3]);
 	}
 
 	private void process () throws Exception {
@@ -31,7 +34,7 @@ public class PhotoOrganizer {
 			if (!Util.checkPhotoExtension (file)) {
 				continue;
 			}
-			Util.renameFile (file, destFolder, testMode);
+			Util.renameFile (file, destFolder, testMode, useLastModifiedDate);
 		}
 	}
 
